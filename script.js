@@ -1,4 +1,7 @@
- 
+let myDisplay = '0';
+let stored = '';
+let pendingOperator = '';
+let startNewNumber = false;
 
 function add(a,b) {
     return a+b;
@@ -32,4 +35,27 @@ function operate(operator, a, b) {
     }
 }
 
-console.log(operate("/", 2, 7));
+function showDisplay() {
+    let display = document.querySelector('.display');
+    display.textContent = myDisplay;
+    return display;
+}
+showDisplay();
+
+function onDigits() {
+    let digits = document.querySelectorAll('.digits');
+    digits.forEach((digit) => {
+        digit.addEventListener('click', (e) => {
+            if (startNewNumber===true || myDisplay ==='0') {
+                myDisplay = e.target.textContent;
+                showDisplay();
+                startNewNumber = false;
+            } else {
+                myDisplay += e.target.textContent;
+                showDisplay();
+                startNewNumber = false;
+            }
+        })
+    });
+} 
+onDigits();
